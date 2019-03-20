@@ -30,19 +30,19 @@ est = sm.OLS(data_y, X2)
 est2 = est.fit()
 print(est2.summary())
 
-knn = KNeighborsClassifier()
+# knn = KNeighborsClassifier()
 
-efs1 = EFS(knn, 
-           min_features=1,
-           max_features=6,
-           scoring='accuracy',
-           print_progress=True)
+# efs1 = EFS(knn, 
+           # min_features=1,
+           # max_features=6,
+           # scoring='accuracy',
+           # print_progress=True)
 
-efs1 = efs1.fit(data_x, data_y)
+# efs1 = efs1.fit(data_x, data_y.astype('int'))
 
-print('Best accuracy score: %.2f' % efs1.best_score_)
-print('Best subset (indices):', efs1.best_idx_)
-print('Best subset (corresponding names):', efs1.best_feature_names_)
+# print('Best accuracy score: %.2f' % efs1.best_score_)
+# print('Best subset (indices):', efs1.best_idx_)
+# print('Best subset (corresponding names):', efs1.best_feature_names_)
 
 data_x_train = data_x[:-30000]
 data_x_test = data_x[-30000:]
@@ -63,3 +63,15 @@ print("Mean squared error: %.2f"
       % mean_squared_error(data_y_test, predictions))
 # Explained variance score: 1 is perfect prediction
 print('Variance score: %.2f' % r2_score(data_y_test, predictions))
+
+regrLog = linear_model.LogisticRegression(multi-class='auto', solver='lbfgs')
+regrLog.fit(data_x_train, data_y_train.astype('int'))
+predictionsLog = regr.predict(data_x_test)
+
+# The coefficients
+print('Coefficients: \n', regrLog.coef_)
+# The mean squared error
+print("Mean squared error: %.2f"
+      % mean_squared_error(data_y_test, predictionsLog))
+# Explained variance score: 1 is perfect prediction
+print('Variance score: %.2f' % r2_score(data_y_test, predictionsLog))
